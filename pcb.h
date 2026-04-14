@@ -14,6 +14,10 @@ typedef struct {
     int pc;
     int mem_lower_boundary;
     int mem_upper_boundary;
+    int arrival_time;
+    int burst_time;
+    int time_in_cpu;
+    int queue_level;
 } PCB;
 
 #endif

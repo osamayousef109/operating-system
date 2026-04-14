@@ -11,4 +11,8 @@ add_executable(OS_Simulation
         memory.c
         pcb.c
         main.c
+        queues.c
+        queues.h
+        scheduler.c
+        scheduler.h
 )
