@@ -1,3 +1,0 @@
-C:/Users/MSi/operating-system/cmake-build-debug/CMakeFiles/OS_Simulation.dir
-C:/Users/MSi/operating-system/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/MSi/operating-system/cmake-build-debug/CMakeFiles/rebuild_cache.dir
