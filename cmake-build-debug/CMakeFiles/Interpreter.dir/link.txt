@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2024.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\Interpreter.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc CMakeFiles\Interpreter.dir/objects.a @CMakeFiles\Interpreter.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\Interpreter.dir/objects.a -Wl,--no-whole-archive -o Interpreter.exe -Wl,--out-implib,libInterpreter.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Interpreter.dir\linkLibs.rsp

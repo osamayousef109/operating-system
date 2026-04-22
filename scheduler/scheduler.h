@@ -8,6 +8,7 @@
 typedef enum {RR, HRRN, MLFQ} Algorithm;
 
 extern int system_time;
+extern PCB* running_process;
 
 void runOS(Algorithm algo);
 

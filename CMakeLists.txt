@@ -6,8 +6,8 @@ set(CMAKE_C_STANDARD 11)
 # Add include directories
 include_directories(${CMAKE_SOURCE_DIR}/core)
 include_directories(${CMAKE_SOURCE_DIR}/memory)
-include_directories(${CMAKE_SOURCE_DIR}/scheduler)
-include_directories(${CMAKE_SOURCE_DIR}/execution)
+#include_directories(${CMAKE_SOURCE_DIR}/scheduler)
+#include_directories(${CMAKE_SOURCE_DIR}/execution)
 
 # List your files here. As you create .c files, add them to this list.
 add_executable(OS_Simulation
@@ -18,9 +18,7 @@ add_executable(OS_Simulation
         core/pcb.c
         core/queues.h
         core/queues.c
-        core/mutex.h
-        core/mutex.c
-        
+
         # Memory Management
         memory/memory.h
         memory/memory.c
@@ -28,4 +26,8 @@ add_executable(OS_Simulation
         # Scheduler
         scheduler/scheduler.h
         scheduler/scheduler.c
+        core/mutex.h
+        core/mutex.c
+        execution/syscalls.h
+        execution/syscalls.c
 )
