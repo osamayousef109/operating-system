@@ -5,6 +5,8 @@
 #ifndef QUEUES_H
 #define QUEUES_H
 
+#include "pcb.h"
+
 typedef struct Node {
     PCB* process;
     struct Node* next;
@@ -22,4 +24,5 @@ int empty(Queue* queue);
 void push(PCB* process, Queue* queue);
 PCB* pop(Queue* queue);
 void print_queue(Queue* queue, const char* name);
+PCB* removeProcessByPID(Queue* queue, int pid);
 #endif
