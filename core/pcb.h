@@ -13,7 +13,10 @@ typedef struct {
     ProcessState state;
     int pc;
     int mem_lower_boundary;
-    int mem_upper_boundary;
+    char fileName[50];
+    int queue_level;
+    int burst_time;
+    int arrival_time;
 } PCB;
 
 #endif

@@ -30,4 +30,6 @@ add_executable(OS_Simulation
         core/mutex.c
         execution/syscalls.h
         execution/syscalls.c
+        execution/interpreter.c
+        execution/interpreter.h
 )

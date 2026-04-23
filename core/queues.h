@@ -19,6 +19,7 @@ typedef struct {
 
 extern Queue readyQueue;
 extern Queue blockedQueue;
+extern Queue diskQueue;
 
 int empty(Queue* queue);
 void push(PCB* process, Queue* queue);

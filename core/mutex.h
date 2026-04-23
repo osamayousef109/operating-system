@@ -14,7 +14,10 @@ typedef struct {
     Queue blocked_queue;
 } mutex;
 
+extern mutex system_mutexes[3];
+
 void semWait(mutex* mutex);
 void semSignal(mutex* mutex);
+void init_mutexes();
 
 #endif //MUTEX_H

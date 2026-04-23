@@ -8,7 +8,7 @@
 
 //naming convention:
 //first nine words are lines of code (c0 -> c8)
-//then 5 words for pcb
+//then 8 words for pcb
 //then 3 words for the variables
 
 typedef struct {

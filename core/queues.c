@@ -5,6 +5,7 @@
 
 Queue readyQueue = {NULL,NULL};
 Queue blockedQueue = {NULL,NULL};
+Queue diskQueue = {NULL, NULL};
 
 int empty(Queue* queue) {
     return queue->tail == NULL;
@@ -86,5 +87,5 @@ PCB* removeProcessByPID(Queue* queue, int pid) {
         current = current->next;
     }
     
-    return NULL;  // Process not found
+    return NULL;
 }
