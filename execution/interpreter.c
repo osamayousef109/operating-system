@@ -71,6 +71,9 @@ void execute_one_instruction() {
         return;
     }
 
+    // REQUIRED OUTPUT: Print the currently executing instruction
+    printf("Time %d: Process %d is currently executing: %s\n", system_time, running_process->pid, instruction);
+
     running_process->pc++;
 
     char line_copy[100];
@@ -84,11 +87,13 @@ void execute_one_instruction() {
 
     if (cmd == NULL) return;
 
+    // 1. print
     if (strcmp(cmd, "print") == 0) {
         char* val = getValue(arg1);
         print(val);
         printf("\n");
     }
+    // 2. assign
     else if (strcmp(cmd, "assign") == 0) {
         if (arg2 != NULL && strcmp(arg2, "input") == 0) {
             char* val = input();
@@ -120,9 +125,12 @@ void execute_one_instruction() {
     else if (strcmp(cmd, "printFromTo") == 0) {
         int start = atoi(getValue(arg1));
         int end = atoi(getValue(arg2));
-        for (int j = start; j <= end; j++) {
-            printf("%d\n", j);
+        if (start <= end) {
+            for (int j = start; j <= end; j++) printf("%d ", j);
+        } else {
+            for (int j = start; j >= end; j--) printf("%d ", j);
         }
+        printf("\n");
     }
     else if (strcmp(cmd, "semWait") == 0) {
         mutex* target_mutex = getMutexByName(arg1);

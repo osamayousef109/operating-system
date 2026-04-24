@@ -5,13 +5,24 @@
 #include "queues.h"
 #include "scheduler.h"
 #include "memory.h"
-#include "../execution/interpreter.h"
 #include "../execution/syscalls.h"
+#include "../execution/interpreter.h"
 
+// ==========================================
+// CONFIGURATION BLOCK (TA CAN CHANGE THESE)
+// ==========================================
+int RR_TIME_SLICE = 2; // Instructions per time slice for Round Robin [cite: 127]
+
+// Arrival Times for Processes [cite: 129]
+int p1_arrival = 0;
+int p2_arrival = 1;
+int p3_arrival = 4;
+// ==========================================
+
+// --- Global Scheduler Variables ---
 int system_time = 0;
 PCB* running_process = NULL;
 int current_slice_ticks = 0;
-const int time_slice = 2;
 
 Queue mlfq[4] = {
     {NULL, NULL},
@@ -20,21 +31,14 @@ Queue mlfq[4] = {
     {NULL, NULL}
 };
 
+// --- Memory Management ---
 #define PROCESS_MEM_SIZE 20
 int memory_slots[2] = {0, 0};
 
 int allocate_memory_slot() {
-    int slot_start = -1;
-    if (memory_slots[0] == 0) { memory_slots[0] = 1; slot_start = 0; }
-    else if (memory_slots[1] == 0) { memory_slots[1] = 1; slot_start = 20; }
-
-    if (slot_start != -1) {
-        for (int i = slot_start; i < slot_start + PROCESS_MEM_SIZE; i++) {
-            main_memory[i].name[0] = '\0';
-            main_memory[i].value[0] = '\0';
-        }
-    }
-    return slot_start;
+    if (memory_slots[0] == 0) { memory_slots[0] = 1; return 0; }
+    if (memory_slots[1] == 0) { memory_slots[1] = 1; return 20; }
+    return -1;
 }
 
 void free_memory_slot(int lower_boundary) {
@@ -46,6 +50,7 @@ void free_memory_slot(int lower_boundary) {
         memset(main_memory[i].value, 0, 50);
     }
 }
+
 void sync_pcb_to_memory(PCB* p) {
     if (p->mem_lower_boundary == -1) return;
     int base = p->mem_lower_boundary + 9;
@@ -59,6 +64,7 @@ void sync_pcb_to_memory(PCB* p) {
     sprintf(main_memory[base + 6].name, "burst");   sprintf(main_memory[base + 6].value, "%d", p->burst_time);
     sprintf(main_memory[base + 7].name, "arrival"); sprintf(main_memory[base + 7].value, "%d", p->arrival_time);
 }
+
 void load_program_to_memory(PCB* p) {
     int lineCount = 0;
     char** lines = readLines(p->fileName, &lineCount);
@@ -67,22 +73,23 @@ void load_program_to_memory(PCB* p) {
         printf("OS Error: Could not find %s on disk.\n", p->fileName);
         return;
     }
+
     for (int i = 0; i < lineCount && i < 9; i++) {
         sprintf(main_memory[p->mem_lower_boundary + i].name, "c%d", i);
         strncpy(main_memory[p->mem_lower_boundary + i].value, lines[i], 49);
         free(lines[i]);
     }
     free(lines);
+
     for (int i = lineCount; i < 9; i++) {
         main_memory[p->mem_lower_boundary + i].name[0] = '\0';
         main_memory[p->mem_lower_boundary + i].value[0] = '\0';
     }
-    sync_pcb_to_memory(p);
 
-    printf("Time %d: Process %d loaded into memory at word %d.\n", system_time, p->pid, p->mem_lower_boundary);
+    sync_pcb_to_memory(p);
 }
 
-
+// --- Process Creation ---
 PCB* create_process(int id, int arrival, int burst, const char* filename) {
     PCB* p = (PCB*)malloc(sizeof(PCB));
     p->pid = id;
@@ -99,12 +106,14 @@ PCB* create_process(int id, int arrival, int burst, const char* filename) {
     if (mem_start != -1) {
         p->mem_lower_boundary = mem_start;
         load_program_to_memory(p);
+        printf("Time %d: Process %d swapped IN from Disk to Memory.\n", system_time, p->pid); //
     } else {
-        printf("Time %d: Memory full. Process %d (%s) stored in Disk Queue.\n", system_time, p->pid, p->fileName);
+        printf("Time %d: Memory full. Process %d swapped OUT to Disk Queue.\n", system_time, p->pid); //
         p->mem_lower_boundary = -1;
     }
     return p;
 }
+
 PCB* pop_HRRN(Queue* queue, int currentTime) {
     if (empty(queue)) return NULL;
     Node* current = queue->head;
@@ -143,10 +152,30 @@ PCB* pop_MLFQ() {
     return NULL;
 }
 
+void print_queues(Algorithm algo) {
+    printf("\n--- System Queues Status [Time %d] ---\n", system_time);
+
+    if (algo == MLFQ) {
+        for (int i = 0; i < 4; i++) {
+            char name[30];
+            sprintf(name, "MLFQ Level %d (Quantum %d)", i, (1 << i));
+            print_queue(&mlfq[i], name);
+        }
+    } else {
+        print_queue(&readyQueue, "Ready Queue");
+    }
+
+    print_queue(&blockedQueue, "Blocked Queue");
+
+    printf("--------------------------------------\n\n");
+}
+
+// --- Main OS Loop ---
 void runOS(Algorithm algo) {
     printf("--- Starting OS Simulation ---\n");
 
     while (1) {
+        // Bridge for Semaphores to MLFQ
         if (algo == MLFQ) {
             while (!empty(&readyQueue)) {
                 PCB* unblocked_proc = pop(&readyQueue);
@@ -154,10 +183,11 @@ void runOS(Algorithm algo) {
             }
         }
 
+        // 1. Admit New Processes based on Configurable Timeline [cite: 129]
         PCB* new_process = NULL;
-        if (system_time == 0) new_process = create_process(1, 0, 7, "program1.txt");
-        if (system_time == 1) new_process = create_process(2, 1, 7, "program2.txt");
-        if (system_time == 4) new_process = create_process(3, 4, 9, "program3.txt");
+        if (system_time == p1_arrival) new_process = create_process(1, p1_arrival, 10, "program1.txt");
+        if (system_time == p2_arrival) new_process = create_process(2, p2_arrival, 8, "program2.txt");
+        if (system_time == p3_arrival) new_process = create_process(3, p3_arrival, 6, "program3.txt");
 
         if (new_process != NULL) {
             if (new_process->mem_lower_boundary == -1) {
@@ -168,6 +198,7 @@ void runOS(Algorithm algo) {
             }
         }
 
+        // 2. Dispatch a Process if CPU is idle
         if (running_process == NULL) {
             if (algo == RR && !empty(&readyQueue)) {
                 running_process = pop(&readyQueue);
@@ -181,42 +212,53 @@ void runOS(Algorithm algo) {
                 running_process->state = RUNNING;
                 sync_pcb_to_memory(running_process);
                 current_slice_ticks = 0;
-                printf("Time %d: Process %d dispatched to CPU.\n", system_time, running_process->pid);
+                printf("Time %d: Process %d dispatched to CPU.\n", system_time, running_process->pid); // [cite: 125]
+                print_queues(algo); // Print queues after dispatch event
             }
         }
+
+        // 3. Execute CPU Cycle
         if (running_process != NULL) {
             current_slice_ticks++;
 
             execute_one_instruction();
             sync_pcb_to_memory(running_process);
 
+            // Check if blocked by semWait
             if (running_process->state == BLOCKED) {
                 printf("Time %d: Process %d BLOCKED by Semaphore.\n", system_time, running_process->pid);
                 running_process = NULL;
+                print_queues(algo); // Print queues after block event
             }
+            // Check if finished
             else if (running_process->pc >= 9 || main_memory[running_process->mem_lower_boundary + running_process->pc - 1].value[0] == '\0') {
                 printf("Time %d: Process %d FINISHED.\n", system_time, running_process->pid);
 
                 free_memory_slot(running_process->mem_lower_boundary);
                 free(running_process);
                 running_process = NULL;
+                print_queues(algo); // Print queues after finish event
 
+                // Bring in a waiting process from the Disk Queue
                 if (!empty(&diskQueue)) {
                     PCB* disk_proc = pop(&diskQueue);
                     disk_proc->mem_lower_boundary = allocate_memory_slot();
                     load_program_to_memory(disk_proc);
+                    printf("Time %d: Process %d swapped IN from Disk to Memory.\n", system_time, disk_proc->pid); //
 
                     if (algo == MLFQ) push(disk_proc, &mlfq[0]);
                     else push(disk_proc, &readyQueue);
                 }
             }
+            // Preemption Logic
             else {
-                if (algo == RR && current_slice_ticks == time_slice) {
+                if (algo == RR && current_slice_ticks == RR_TIME_SLICE) { // Uses configurable time slice [cite: 127]
                     printf("Time %d: Process %d preempted (RR Slice).\n", system_time, running_process->pid);
                     running_process->state = READY;
                     sync_pcb_to_memory(running_process);
                     push(running_process, &readyQueue);
                     running_process = NULL;
+                    print_queues(algo); // Print queues after preempt event
                 }
                 else if (algo == MLFQ) {
                     int currentQuantum = 1 << running_process->queue_level;
@@ -228,10 +270,13 @@ void runOS(Algorithm algo) {
                         sync_pcb_to_memory(running_process);
                         push(running_process, &mlfq[running_process->queue_level]);
                         running_process = NULL;
+                        print_queues(algo); // Print queues after preempt event
                     }
                 }
             }
         }
+
+        printMemory();
 
         system_time++;
         if (system_time > 60) break;
