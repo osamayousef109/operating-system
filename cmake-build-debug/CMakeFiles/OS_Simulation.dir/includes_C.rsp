@@ -1,1 +1,1 @@
--I"C:/Users/MSi/operating-system/core" -I"C:/Users/MSi/operating-system/memory"
+-I"C:/Users/MSi/operating-system/core" -I"C:/Users/MSi/operating-system/memory" -I"C:/Users/MSi/operating-system/cmake-build-debug/_deps/raylib-src/src"

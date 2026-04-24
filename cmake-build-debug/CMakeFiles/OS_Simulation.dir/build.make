@@ -211,6 +211,7 @@ OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/core/mutex.c.obj
 OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/execution/syscalls.c.obj
 OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/execution/interpreter.c.obj
 OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/build.make
+OS_Simulation.exe: _deps/raylib-build/raylib/libraylib.a
 OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/linkLibs.rsp
 OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/objects1.rsp
 OS_Simulation.exe: CMakeFiles/OS_Simulation.dir/link.txt

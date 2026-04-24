@@ -25,10 +25,10 @@ CMakeFiles/OS_Simulation.dir/execution/interpreter.c.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
  C:/Users/MSi/operating-system/scheduler/scheduler.h \
  C:/Users/MSi/operating-system/core/pcb.h \
- C:/Users/MSi/operating-system/core/mutex.h \
  C:/Users/MSi/operating-system/core/queues.h \
  C:/Users/MSi/operating-system/core/pcb.h \
+ C:/Users/MSi/operating-system/core/mutex.h \
+ C:/Users/MSi/operating-system/core/queues.h \
  C:/Users/MSi/operating-system/memory/memory.h \
  C:\Users\MSi\operating-system\execution\syscalls.h \
- C:/Users/MSi/operating-system/memory/memory.h \
- C:\Users\MSi\operating-system\execution\interpreter.h
+ C:/Users/MSi/operating-system/memory/memory.h

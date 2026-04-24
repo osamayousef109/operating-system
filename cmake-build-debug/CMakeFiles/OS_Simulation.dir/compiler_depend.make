@@ -12,9 +12,9 @@ CMakeFiles/OS_Simulation.dir/core/mutex.c.obj: C:/Users/MSi/operating-system/cor
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stddef.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Users/MSi/operating-system/core/pcb.h \
+  C:/Users/MSi/operating-system/core/queues.h \
   C:/Users/MSi/operating-system/scheduler/scheduler.h \
   C:/Users/MSi/operating-system/core/mutex.h \
-  C:/Users/MSi/operating-system/core/pcb.h \
   C:/Users/MSi/operating-system/core/queues.h
 
 CMakeFiles/OS_Simulation.dir/core/pcb.c.obj: C:/Users/MSi/operating-system/core/pcb.c
@@ -73,7 +73,6 @@ CMakeFiles/OS_Simulation.dir/execution/interpreter.c.obj: C:/Users/MSi/operating
   C:/Users/MSi/operating-system/core/queues.h \
   C:/Users/MSi/operating-system/memory/memory.h \
   C:/Users/MSi/operating-system/scheduler/scheduler.h \
-  C:/Users/MSi/operating-system/execution/interpreter.h \
   C:/Users/MSi/operating-system/execution/syscalls.h
 
 CMakeFiles/OS_Simulation.dir/execution/syscalls.c.obj: C:/Users/MSi/operating-system/execution/syscalls.c \
@@ -105,20 +104,25 @@ CMakeFiles/OS_Simulation.dir/execution/syscalls.c.obj: C:/Users/MSi/operating-sy
   C:/Users/MSi/operating-system/execution/syscalls.h
 
 CMakeFiles/OS_Simulation.dir/main.c.obj: C:/Users/MSi/operating-system/main.c \
+  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_mac.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_secapi.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
+  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdio.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/string.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
   C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
+  _deps/raylib-src/src/raylib.h \
   C:/Users/MSi/operating-system/core/mutex.h \
   C:/Users/MSi/operating-system/core/pcb.h \
   C:/Users/MSi/operating-system/core/queues.h \
@@ -205,9 +209,9 @@ C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/inclu
 
 C:/Users/MSi/operating-system/core/pcb.h:
 
-C:/Users/MSi/operating-system/core/mutex.h:
-
 C:/Users/MSi/operating-system/core/queues.h:
+
+C:/Users/MSi/operating-system/core/mutex.h:
 
 C:/Users/MSi/operating-system/core/pcb.c:
 
@@ -250,6 +254,16 @@ C:/Users/MSi/operating-system/execution/syscalls.h:
 C:/Users/MSi/operating-system/execution/syscalls.c:
 
 C:/Users/MSi/operating-system/main.c:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h:
+
+C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdarg.h:
+
+_deps/raylib-src/src/raylib.h:
 
 C:/Users/MSi/operating-system/memory/memory.c:
 

@@ -14,9 +14,15 @@ CMakeFiles/OS_Simulation.dir/main.c.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/string.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h \
- C:/Users/MSi/operating-system/memory/memory.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
+ C:/Users/MSi/operating-system/cmake-build-debug/_deps/raylib-src/src/raylib.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdarg.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/stdarg.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.3.1.1/bin/mingw/x86_64-w64-mingw32/include/_mingw_stdarg.h \
+ C:/Users/MSi/operating-system/scheduler/scheduler.h \
+ C:/Users/MSi/operating-system/core/pcb.h \
+ C:/Users/MSi/operating-system/core/queues.h \
  C:/Users/MSi/operating-system/core/pcb.h \
  C:/Users/MSi/operating-system/core/mutex.h \
  C:/Users/MSi/operating-system/core/queues.h \
- C:/Users/MSi/operating-system/core/pcb.h \
- C:\Users\MSi\operating-system\scheduler/scheduler.h
+ C:/Users/MSi/operating-system/memory/memory.h

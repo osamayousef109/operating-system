@@ -4,11 +4,12 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 #include "pcb.h"
+#include "queues.h"
 typedef enum {RR, HRRN, MLFQ} Algorithm;
-
+extern Queue mlfq[4];
 extern int system_time;
 extern PCB* running_process;
 
-void runOS(Algorithm algo);
+int stepOS(Algorithm algo);
 
 #endif //SCHEDULER_H
