@@ -3,7 +3,7 @@
 //
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
-#include "pcb.h"
+#include "../core/pcb.h"
 typedef enum {RR, HRRN, MLFQ} Algorithm;
 
 extern int system_time;

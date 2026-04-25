@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "memory.h"
-#include "mutex.h"
+#include "memory/memory.h"
+#include "core/mutex.h"
 #include "scheduler/scheduler.h"
 
 int main() {

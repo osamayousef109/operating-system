@@ -1,7 +1,7 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include "pcb.h"
+#include "../core/pcb.h"
 
 #define MEMORY_SIZE 40
 #define VARIABLES_PER_PROCESS 3
